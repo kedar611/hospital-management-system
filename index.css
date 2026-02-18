@@ -2,18 +2,138 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  @apply bg-slate-50;
+/* 1. Global Reset & Premium Typography */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --primary-glow: conic-gradient(from 180deg at 50% 50%, #16abff33 0deg, #0885ff33 55deg, #54d6ff33 120deg, #0071ff33 160deg, transparent 360deg);
+  --secondary-glow: radial-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
 }
 
-/* Custom scrollbar for the Query Result Table */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #1e293b;
+  overflow-x: hidden;
+  /* Animated Mesh Background */
+  background: #f8fafc;
+  background-attachment: fixed;
 }
+
+/* 2. The Animated Mesh Layer */
+body::before {
+  content: '';
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: var(--primary-glow);
+  filter: blur(80px);
+  z-index: -1;
+  opacity: 0.6;
+  animation: rotateGlow 20s linear infinite;
+}
+
+@keyframes rotateGlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 3. Advanced Glassmorphism Classes */
+.glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+}
+
+/* 4. SQL Editor & Code Styling */
+.sql-editor-container {
+  background: #0f172a; /* Deep Slate */
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sql-editor-container::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), transparent 40%);
+  pointer-events: none;
+}
+
+/* 5. Custom Table Styling (DBMS Project Favorite) */
+.modern-table {
+  width: 100%;
+  border-spacing: 0 8px;
+  border-collapse: separate;
+}
+
+.modern-table tr {
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.modern-table tr:hover {
+  transform: scale(1.01);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+
+.modern-table td {
+  padding: 18px 24px;
+  border: none;
+}
+
+.modern-table td:first-child { border-radius: 16px 0 0 16px; }
+.modern-table td:last-child { border-radius: 0 16px 16px 0; }
+
+/* 6. Glowing Buttons */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.btn-glow:hover::before {
+  left: 100%;
+}
+
+/* 7. Scrollbar Magic */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 rounded-full;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 100px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
 }
